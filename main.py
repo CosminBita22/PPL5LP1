@@ -55,28 +55,29 @@ def sum_button():
     print_result(sum_list(get_input()))
 
 
-root = tk.Tk()
-root.title("Tkinter thingy ")
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("Tkinter thingy ")
 
-frame = tk.Frame(root)
-frame.pack(pady=10)
+    frame = tk.Frame(root)
+    frame.pack(pady=10)
 
-entry = tk.Entry(frame, width=100)
-entry.grid(row=0, column=0, padx=5)
+    entry = tk.Entry(frame, width=100)
+    entry.grid(row=0, column=0, padx=5)
 
-button = tk.Button(frame, text="Add list", command=add_list_button)
-button.grid(row=0, column=1, padx=5)
+    button = tk.Button(frame, text="Add list", command=add_list_button)
+    button.grid(row=0, column=1, padx=5)
 
-button = tk.Button(frame, text="Filter odd", command=filter_odd_button)
-button.grid(row=1, column=1, padx=5)
+    button = tk.Button(frame, text="Filter odd", command=filter_odd_button)
+    button.grid(row=1, column=1, padx=5)
 
-button = tk.Button(frame, text="Filter prime", command=filter_prime_button)
-button.grid(row=2, column=1, padx=5)
+    button = tk.Button(frame, text="Filter prime", command=filter_prime_button)
+    button.grid(row=2, column=1, padx=5)
 
-button = tk.Button(frame, text="Sum list", command=sum_button)
-button.grid(row=3, column=1, padx=5)
+    button = tk.Button(frame, text="Sum list", command=sum_button)
+    button.grid(row=3, column=1, padx=5)
 
-label_output = tk.Text(root)
-label_output.pack(pady=10)
+    label_output = tk.Text(root)
+    label_output.pack(pady=10)
 
-root.mainloop()
+    root.mainloop()
