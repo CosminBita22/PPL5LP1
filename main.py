@@ -10,7 +10,7 @@ def get_input():
 
 def print_result(text):
     label_output.config(state="normal")
-    label_output.delete()
+    label_output.delete("1.0", tk.END)
     label_output.insert(tk.END, text)
     label_output.see(tk.END)
 
@@ -31,6 +31,17 @@ def filter_odd_button():
     print_result(filter_odd(get_input()))
 
 
+def sum_list(number_list):
+    s = 0
+    for i in number_list:
+        s += int(i)
+    return s
+
+
+def sum_button():
+    print_result(sum_list(get_input()))
+
+
 root = tk.Tk()
 root.title("Tkinter thingy ")
 
@@ -45,6 +56,9 @@ button.grid(row=0, column=1, padx=5)
 
 button = tk.Button(frame, text="Filter odd", command=filter_odd_button)
 button.grid(row=1, column=1, padx=5)
+
+button = tk.Button(frame, text="Sum list", command=sum_button)
+button.grid(row=2, column=1, padx=5)
 
 label_output = tk.Text(root)
 label_output.pack(pady=10)
