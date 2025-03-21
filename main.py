@@ -1,5 +1,6 @@
 import tkinter as tk
 import re
+from sympy import isprime
 
 
 def get_input():
@@ -31,6 +32,18 @@ def filter_odd_button():
     print_result(filter_odd(get_input()))
 
 
+def filter_prime(number_list):
+    filtered_number_list = []
+    for i in number_list:
+        if isprime(int(i)):
+            filtered_number_list.append(i)
+    return filtered_number_list
+
+
+def filter_prime_button():
+    print_result(filter_prime(get_input()))
+
+
 def sum_list(number_list):
     s = 0
     for i in number_list:
@@ -57,8 +70,11 @@ button.grid(row=0, column=1, padx=5)
 button = tk.Button(frame, text="Filter odd", command=filter_odd_button)
 button.grid(row=1, column=1, padx=5)
 
-button = tk.Button(frame, text="Sum list", command=sum_button)
+button = tk.Button(frame, text="Filter prime", command=filter_prime_button)
 button.grid(row=2, column=1, padx=5)
+
+button = tk.Button(frame, text="Sum list", command=sum_button)
+button.grid(row=3, column=1, padx=5)
 
 label_output = tk.Text(root)
 label_output.pack(pady=10)
