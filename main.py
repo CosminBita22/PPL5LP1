@@ -1,6 +1,7 @@
 import tkinter as tk
 import re
 from sympy import isprime
+from multiprocessing import Process, Queue
 
 
 def get_input():
@@ -20,39 +21,46 @@ def add_list_button():
     print_result(get_input())
 
 
-def filter_odd(number_list):
-    filtered_number_list = []
-    for i in number_list:
-        if int(i) % 2 != 0:
-            filtered_number_list.append(i)
-    return filtered_number_list
+def filter_odd(number_list, queue):
+    filtered_number_list = [i for i in number_list if int(i) % 2 != 0]
+    queue.put(filtered_number_list)
 
 
 def filter_odd_button():
-    print_result(filter_odd(get_input()))
+    queue = Queue()
+    process = Process(target=filter_odd, args=(get_input(), queue))
+    process.start()
+    process.join()
+    result = queue.get()
+    print_result(result)
 
 
-def filter_prime(number_list):
-    filtered_number_list = []
-    for i in number_list:
-        if isprime(int(i)):
-            filtered_number_list.append(i)
-    return filtered_number_list
+def filter_prime(number_list, queue):
+    filtered_number_list = [i for i in number_list if isprime(int(i))]
+    queue.put(filtered_number_list)
 
 
 def filter_prime_button():
-    print_result(filter_prime(get_input()))
+    queue = Queue()
+    process = Process(target=filter_prime, args=(get_input(), queue))
+    process.start()
+    process.join()
+    result = queue.get()
+    print_result(result)
 
 
-def sum_list(number_list):
-    s = 0
-    for i in number_list:
-        s += int(i)
-    return s
+def sum_list(number_list, queue):
+    total = sum(int(i) for i in number_list)
+    queue.put(total)
 
 
 def sum_button():
-    print_result(sum_list(get_input()))
+    queue = Queue()
+    process = Process(target=sum_list, args=(get_input(), queue))
+    process.start()
+    process.join()
+    result = queue.get()
+    print_result(result)
 
 
 if __name__ == '__main__':
